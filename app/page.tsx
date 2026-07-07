@@ -9,15 +9,12 @@ import {
   Clapperboard, 
   Users, 
   Play,
-  Video,
   Cake,
   Heart,
   MonitorPlay,
   Palette,
   Image as ImageIcon,
   MessageCircle,
-  MapPin,
-  ArrowUp,
   X
 } from "lucide-react";
 import styles from "./page.module.css";
@@ -26,7 +23,9 @@ import { FaFacebook, FaWhatsapp, FaInstagram } from 'react-icons/fa';
 import { SiDavinciresolve } from 'react-icons/si';
 
 export default function Home() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [projects, setProjects] = useState<any[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [reviews, setReviews] = useState<any[]>([]);
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const [newReview, setNewReview] = useState({ name: '', text: '', rating: 5 });
@@ -144,7 +143,7 @@ export default function Home() {
       <section id="about" className={styles.about}>
         <div className={styles.aboutContent}>
           <div className={styles.sectionSubtitle}>About Me</div>
-          <h2 className={`${styles.aboutName} ${styles.heading}`}>Hi, I'm Sumanan</h2>
+          <h2 className={`${styles.aboutName} ${styles.heading}`}>Hi, I&apos;m Sumanan</h2>
           <p className={styles.aboutDesc}>
             Professional Video Editor & Colorist with 5+ years of experience. I specialize in cinematic editing, color grading, sound design and creating visual stories that connect with people.
           </p>
@@ -306,7 +305,7 @@ export default function Home() {
         <div className={styles.footerCta}>
           <div className={styles.ctaText}>
             <h3>Have a project in mind?</h3>
-            <p>Let's create something amazing together!</p>
+            <p>Let&apos;s create something amazing together!</p>
           </div>
           <div className={styles.contactInfo}>
             <div className={styles.contactIcon}><MessageCircle size={24} /></div>

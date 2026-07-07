@@ -32,6 +32,7 @@ export default function AdminPage() {
   const [authError, setAuthError] = useState("");
 
   const [projects, setProjects] = useState<Project[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [reviews, setReviews] = useState<any[]>([]);
   const [isFetching, setIsFetching] = useState(true);
 
@@ -440,7 +441,7 @@ export default function AdminPage() {
                       {review.is_approved ? 'APPROVED' : 'PENDING'}
                     </span>
                   </div>
-                  <p className="text-white/70 text-sm mb-4">"{review.text}"</p>
+                  <p className="text-white/70 text-sm mb-4">&quot;{review.text}&quot;</p>
                   
                   <div className="flex gap-3 mt-auto">
                     <button
