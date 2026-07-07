@@ -1,0 +1,137 @@
+.container {
+  min-height: 100vh;
+  padding: 40px;
+  background-color: #0a0a0a;
+  color: #fff;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 20px;
+}
+
+.header h1 {
+  color: #FFC107;
+  font-size: 2rem;
+}
+
+.btnLogout {
+  background: transparent;
+  color: #ff4d4f;
+  border: 1px solid #ff4d4f;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btnLogout:hover {
+  background: #ff4d4f;
+  color: #000;
+}
+
+.reviewsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.reviewCard {
+  background: #111;
+  border: 1px solid #333;
+  padding: 20px;
+  border-radius: 12px;
+  position: relative;
+}
+
+.reviewCard.unapproved {
+  border-color: #FFC107;
+}
+
+.reviewCard.approved {
+  border-color: #4CAF50;
+  opacity: 0.7;
+}
+
+.reviewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.reviewerName {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.reviewStatus {
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.statusPending {
+  background: rgba(255, 193, 7, 0.2);
+  color: #FFC107;
+}
+
+.statusLive {
+  background: rgba(76, 175, 80, 0.2);
+  color: #4CAF50;
+}
+
+.reviewText {
+  color: #ccc;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.reviewActions {
+  display: flex;
+  gap: 10px;
+}
+
+.btnApprove {
+  background: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  flex: 1;
+  transition: opacity 0.3s ease;
+}
+
+.btnApprove:hover {
+  opacity: 0.8;
+}
+
+.btnDelete {
+  background: #ff4d4f;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  flex: 1;
+  transition: opacity 0.3s ease;
+}
+
+.btnDelete:hover {
+  opacity: 0.8;
+}
+
+.emptyState {
+  text-align: center;
+  color: #888;
+  padding: 40px;
+  font-size: 1.2rem;
+  grid-column: 1 / -1;
+}
