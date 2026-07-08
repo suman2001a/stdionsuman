@@ -89,8 +89,7 @@ export default function Home() {
 
   return (
     <main className={styles.container}>
-      {/* Header hidden because it's baked into the mockup screenshot */}
-      <header className={styles.header} style={{ display: 'none' }}>
+      <header className={styles.header}>
         <div className={styles.logo}>
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
              <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="#fff"/>
@@ -120,15 +119,46 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section id="home" style={{ width: '100%', overflow: 'hidden', position: 'relative' }}>
-        <Image 
-          src="/full-hero-mockup.png" 
-          alt="Sumanan Portfolio Hero" 
-          width={1920}
-          height={1080}
-          style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
-          priority
-        />
+      <section id="home" className={styles.hero}>
+        <div className={styles.heroBackgroundContainer}>
+          <Image 
+            src="/main-bg.png" 
+            alt="Hero Background" 
+            fill
+            className={styles.heroBgImg}
+            priority
+          />
+          <div className={styles.heroBgOverlay}></div>
+        </div>
+
+        <div className={styles.heroContainer}>
+          <div className={styles.heroLeftText}>
+            <div className={styles.heroSub}>
+              — I'M SUMANAN
+            </div>
+            <h1 className={styles.heroTitle}>
+              VIDEO EDITOR<br />
+              <span className={styles.heroTitleSub}>& COLORIST</span>
+            </h1>
+            <p style={{ marginTop: '20px', maxWidth: '400px', lineHeight: '1.6', color: '#ccc' }}>
+              I create cinematic videos that tell your story beautifully. Transforming moments into memories with creativity and passion.
+            </p>
+            <div style={{ display: 'flex', gap: '15px', marginTop: '30px' }}>
+              <Link href="#portfolio" style={{ textDecoration: 'none' }}>
+                <button className={styles.btnPrimary}><Play size={18} /> WATCH SHOWREEL</button>
+              </Link>
+              <Link href="#portfolio" style={{ textDecoration: 'none' }}>
+                <button className={styles.btnSecondary}>VIEW MY WORK</button>
+              </Link>
+            </div>
+          </div>
+          <div className={styles.heroRightText}>
+             <div className={styles.heroFloatingText}>
+               <span className={`${styles.cursive} ${styles.editingIs}`}>Editing is</span><br />
+               <span className={`${styles.cursive} ${styles.myPassion}`}>my Passion</span>
+             </div>
+          </div>
+        </div>
         <div className={styles.followMe}>
           <span className={styles.followText}>FOLLOW ME</span>
           <div className={styles.socialIcons}>
