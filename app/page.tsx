@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import styles from "./page.module.css";
 
-import { FaFacebook, FaWhatsapp, FaInstagram } from 'react-icons/fa';
+import { FaFacebook, FaWhatsapp, FaInstagram, FaTiktok } from 'react-icons/fa';
 import { SiDavinciresolve } from 'react-icons/si';
 
 export default function Home() {
@@ -111,7 +111,7 @@ export default function Home() {
           <Link href="#reviews" className={styles.navLink}>Reviews</Link>
           <Link href="#contact" className={styles.navLink}>Contact</Link>
         </nav>
-        <Link href="https://wa.me/94704466858" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+        <Link href="https://wa.me/94768019190" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
           <button className={styles.btnPrimary}>
             <MessageCircle size={18} />
             WhatsApp Me
@@ -133,6 +133,7 @@ export default function Home() {
           <span className={styles.followText}>FOLLOW ME</span>
           <div className={styles.socialIcons}>
             <a href="https://www.instagram.com/stud.iossquare?igsh=MTZ1c3Z3ZGMxNWFxaw==" target="_blank" rel="noopener noreferrer" className={`${styles.socialIconBtn} ${styles.ig}`}><FaInstagram /></a>
+            <a href="https://www.tiktok.com/@s.square562?_r=1&_t=ZS-97qwHQbGMOQ" target="_blank" rel="noopener noreferrer" className={`${styles.socialIconBtn} ${styles.tk}`}><FaTiktok /></a>
             <a href="https://whatsapp.com/channel/0029Vb6EUyPIiRootljmTJ2h" target="_blank" rel="noopener noreferrer" className={`${styles.socialIconBtn} ${styles.wa}`}><FaWhatsapp /></a>
             <a href="https://www.facebook.com/profile.php?id=61582335014918" target="_blank" rel="noopener noreferrer" className={`${styles.socialIconBtn} ${styles.fb}`}><FaFacebook /></a>
           </div>
@@ -310,11 +311,11 @@ export default function Home() {
           <div className={styles.contactInfo}>
             <div className={styles.contactIcon}><MessageCircle size={24} /></div>
             <div className={styles.contactDetails}>
-              <h4>+94 70 446 6858</h4>
+              <h4>+94 76 801 9190</h4>
               <p>Ilavalai, Jaffna</p>
             </div>
           </div>
-          <Link href="https://wa.me/94704466858" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+          <Link href="https://wa.me/94768019190" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
             <button className={styles.btnPrimary}>
               <MessageCircle size={18} />
               WhatsApp Me

@@ -39,12 +39,15 @@ export default function AdminPage() {
   // Form State
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState(CATEGORIES[0]);
+  const [videoSource, setVideoSource] = useState<"url" | "file">("url");
   const [videoUrl, setVideoUrl] = useState("");
+  const [videoFile, setVideoFile] = useState<File | null>(null);
   const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
   const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(null);
 
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const videoInputRef = useRef<HTMLInputElement>(null);
 
   const fetchProjects = async () => {
     setIsFetching(true);
@@ -112,16 +115,27 @@ export default function AdminPage() {
   const resetForm = () => {
     setTitle("");
     setCategory(CATEGORIES[0]);
+    setVideoSource("url");
     setVideoUrl("");
+    setVideoFile(null);
     setThumbnailFile(null);
     setThumbnailPreview(null);
     if (fileInputRef.current) fileInputRef.current.value = "";
+    if (videoInputRef.current) videoInputRef.current.value = "";
   };
 
   const handleUpload = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title || !category || !videoUrl || !thumbnailFile) {
+    if (!title || !category || !thumbnailFile) {
       alert("Please fill in all fields and select a thumbnail image.");
+      return;
+    }
+    if (videoSource === "url" && !videoUrl) {
+      alert("Please enter a video URL.");
+      return;
+    }
+    if (videoSource === "file" && !videoFile) {
+      alert("Please select a video file.");
       return;
     }
 
@@ -140,9 +154,29 @@ export default function AdminPage() {
       if (uploadError) throw uploadError;
 
       // Get public URL
-      const { data: { publicUrl } } = supabase.storage
+      const { data: { publicUrl: thumbUrl } } = supabase.storage
         .from('portfolio-thumbnails')
         .getPublicUrl(filePath);
+
+      // 1.5 Upload video file if selected
+      let finalVideoUrl = videoUrl;
+      if (videoSource === "file" && videoFile) {
+        const vidExt = videoFile.name.split('.').pop();
+        const vidName = `${Date.now()}-${Math.random().toString(36).substring(2, 15)}.${vidExt}`;
+        const vidPath = `videos/${vidName}`;
+
+        const { error: vidUploadError } = await supabase.storage
+          .from('portfolio-thumbnails')
+          .upload(vidPath, videoFile);
+
+        if (vidUploadError) throw vidUploadError;
+
+        const { data: { publicUrl: vUrl } } = supabase.storage
+          .from('portfolio-thumbnails')
+          .getPublicUrl(vidPath);
+          
+        finalVideoUrl = vUrl;
+      }
 
       // 2. Insert into projects table
       const { error: dbError } = await supabase
@@ -150,8 +184,8 @@ export default function AdminPage() {
         .insert({
           title,
           category,
-          video_url: videoUrl,
-          thumbnail_url: publicUrl
+          video_url: finalVideoUrl,
+          thumbnail_url: thumbUrl
         });
 
       if (dbError) throw dbError;
@@ -167,18 +201,24 @@ export default function AdminPage() {
     }
   };
 
-  const handleDelete = async (id: string, thumbnailUrl: string) => {
+  const handleDelete = async (id: string, thumbnailUrl: string, videoUrl: string) => {
     if (!window.confirm("Are you sure you want to delete this project?")) return;
 
     try {
-      // Extract file path from URL
-      const urlParts = thumbnailUrl.split('/portfolio-thumbnails/');
-      if (urlParts.length > 1) {
-        const filePath = urlParts[1];
-        // 1. Delete from storage
+      const filesToRemove = [];
+      const thumbParts = thumbnailUrl.split('/portfolio-thumbnails/');
+      if (thumbParts.length > 1) {
+        filesToRemove.push(thumbParts[1]);
+      }
+      const vidParts = videoUrl.split('/portfolio-thumbnails/');
+      if (vidParts.length > 1) {
+        filesToRemove.push(vidParts[1]);
+      }
+
+      if (filesToRemove.length > 0) {
         const { error: storageError } = await supabase.storage
           .from('portfolio-thumbnails')
-          .remove([filePath]);
+          .remove(filesToRemove);
         if (storageError) console.error("Error deleting from storage:", storageError);
       }
 
@@ -329,14 +369,53 @@ export default function AdminPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-white/80 mb-1">Video URL (YouTube/Vimeo)</label>
-                <input
-                  type="url"
-                  value={videoUrl}
-                  onChange={(e) => setVideoUrl(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-md px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-white/20"
-                  required
-                />
+                <label className="block text-sm font-medium text-white/80 mb-2">Video Source</label>
+                <div className="flex gap-4 mb-3">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input 
+                      type="radio" 
+                      name="videoSource" 
+                      value="url" 
+                      checked={videoSource === "url"} 
+                      onChange={() => setVideoSource("url")} 
+                      className="accent-white"
+                    />
+                    <span className="text-sm text-white/80">YouTube/Vimeo URL</span>
+                  </label>
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input 
+                      type="radio" 
+                      name="videoSource" 
+                      value="file" 
+                      checked={videoSource === "file"} 
+                      onChange={() => setVideoSource("file")} 
+                      className="accent-white"
+                    />
+                    <span className="text-sm text-white/80">Upload Video File</span>
+                  </label>
+                </div>
+                
+                {videoSource === "url" ? (
+                  <input
+                    type="url"
+                    value={videoUrl}
+                    onChange={(e) => setVideoUrl(e.target.value)}
+                    placeholder="https://..."
+                    className="w-full bg-white/5 border border-white/10 rounded-md px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-white/20"
+                    required={videoSource === "url"}
+                  />
+                ) : (
+                  <div className="flex items-center gap-4">
+                    <input
+                      type="file"
+                      ref={videoInputRef}
+                      onChange={(e) => setVideoFile(e.target.files ? e.target.files[0] : null)}
+                      accept="video/*"
+                      className="w-full bg-white/5 border border-white/10 rounded-md px-4 py-2 text-white text-sm file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-white/10 file:text-white hover:file:bg-white/20"
+                      required={videoSource === "file" && !videoFile}
+                    />
+                  </div>
+                )}
               </div>
 
               <div>
@@ -406,7 +485,7 @@ export default function AdminPage() {
                     </div>
 
                     <button
-                      onClick={() => handleDelete(project.id, project.thumbnail_url)}
+                      onClick={() => handleDelete(project.id, project.thumbnail_url, project.video_url)}
                       className="p-2 text-red-500 hover:bg-red-500/10 rounded-md transition-colors"
                       title="Delete Project"
                     >
