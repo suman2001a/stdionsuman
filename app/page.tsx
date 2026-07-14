@@ -15,7 +15,9 @@ import {
   Palette,
   Image as ImageIcon,
   MessageCircle,
-  X
+  X,
+  Mail,
+  MapPin
 } from "lucide-react";
 import styles from "./page.module.css";
 
@@ -31,6 +33,7 @@ export default function Home() {
   const [newReview, setNewReview] = useState({ name: '', text: '', rating: 5 });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMsg, setSubmitMsg] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   useEffect(() => {
     // Fetch projects
@@ -90,19 +93,7 @@ export default function Home() {
   return (
     <main className={styles.container}>
       <header className={styles.header}>
-        <div className={styles.logo}>
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-             <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="#fff"/>
-          </svg>
-          <div className={styles.logoTextContainer}>
-            <span className={styles.logoTextMain}>s square</span>
-            <div className={styles.logoTextSubContainer}>
-              <span className={styles.logoLine}></span>
-              <span className={styles.logoTextSub}>STUDIO</span>
-            </div>
-          </div>
-        </div>
-        <nav className={styles.nav}>
+        <nav className={styles.nav} style={{ marginLeft: '550px', marginTop: '20px' }}>
           <Link href="#home" className={`${styles.navLink} ${styles.active}`}>Home</Link>
           <Link href="#about" className={styles.navLink}>About</Link>
           <Link href="#services" className={styles.navLink}>Services</Link>
@@ -110,62 +101,41 @@ export default function Home() {
           <Link href="#reviews" className={styles.navLink}>Reviews</Link>
           <Link href="#contact" className={styles.navLink}>Contact</Link>
         </nav>
-        <Link href="https://wa.me/94768019190" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-          <button className={styles.btnPrimary}>
-            <MessageCircle size={18} />
-            WhatsApp Me
-          </button>
-        </Link>
       </header>
 
       {/* Hero Section */}
-      <section id="home" className={styles.hero}>
-        <div className={styles.heroBackgroundContainer}>
-          <Image 
-            src="/main-bg.png" 
+      <section id="home" className={styles.heroSection}>
+        <div className={styles.heroImageWrapper}>
+          <img 
+            src="/1.jpg (3).jpeg" 
             alt="Hero Background" 
-            fill
-            className={styles.heroBgImg}
-            priority
+            className={styles.heroImgResponsive}
           />
-          <div className={styles.heroBgOverlay}></div>
         </div>
 
-        <div className={styles.heroContainer}>
-          <div className={styles.heroLeftText}>
-            <div className={styles.heroSub}>
-              — I'M SUMANAN
-            </div>
-            <h1 className={styles.heroTitle}>
-              VIDEO EDITOR<br />
-              <span className={styles.heroTitleSub}>& COLORIST</span>
-            </h1>
-            <p style={{ marginTop: '20px', maxWidth: '400px', lineHeight: '1.6', color: '#ccc' }}>
-              I create cinematic videos that tell your story beautifully. Transforming moments into memories with creativity and passion.
-            </p>
-            <div style={{ display: 'flex', gap: '15px', marginTop: '30px' }}>
-              <Link href="#portfolio" style={{ textDecoration: 'none' }}>
-                <button className={styles.btnPrimary}><Play size={18} /> WATCH SHOWREEL</button>
-              </Link>
-              <Link href="#portfolio" style={{ textDecoration: 'none' }}>
-                <button className={styles.btnSecondary}>VIEW MY WORK</button>
-              </Link>
-            </div>
+        {/* Action Section */}
+        <div className={styles.actionSection}>
+          <div className={styles.heroButtons}>
+            <Link href="#portfolio" style={{ textDecoration: 'none' }}>
+              <button className={styles.btnPrimary}>
+                <Play size={18} fill="currentColor" />
+                WATCH SHOWREEL
+              </button>
+            </Link>
+            <Link href="#portfolio" style={{ textDecoration: 'none' }}>
+              <button className={styles.btnSecondary}>
+                VIEW MY WORK
+              </button>
+            </Link>
           </div>
-          <div className={styles.heroRightText}>
-             <div className={styles.heroFloatingText}>
-               <span className={`${styles.cursive} ${styles.editingIs}`}>Editing is</span><br />
-               <span className={`${styles.cursive} ${styles.myPassion}`}>my Passion</span>
-             </div>
-          </div>
-        </div>
-        <div className={styles.followMe}>
-          <span className={styles.followText}>FOLLOW ME</span>
-          <div className={styles.socialIcons}>
-            <a href="https://www.instagram.com/stud.iossquare?igsh=MTZ1c3Z3ZGMxNWFxaw==" target="_blank" rel="noopener noreferrer" className={`${styles.socialIconBtn} ${styles.ig}`}><FaInstagram /></a>
-            <a href="https://www.tiktok.com/@s.square562?_r=1&_t=ZS-97qwHQbGMOQ" target="_blank" rel="noopener noreferrer" className={`${styles.socialIconBtn} ${styles.tk}`}><FaTiktok /></a>
-            <a href="https://whatsapp.com/channel/0029Vb6EUyPIiRootljmTJ2h" target="_blank" rel="noopener noreferrer" className={`${styles.socialIconBtn} ${styles.wa}`}><FaWhatsapp /></a>
-            <a href="https://www.facebook.com/profile.php?id=61582335014918" target="_blank" rel="noopener noreferrer" className={`${styles.socialIconBtn} ${styles.fb}`}><FaFacebook /></a>
+          <div className={styles.followMe}>
+            <span className={styles.followText}>FOLLOW ME</span>
+            <div className={styles.socialIcons}>
+              <a href="https://www.instagram.com/stud.iossquare?igsh=MTZ1c3Z3ZGMxNWFxaw==" target="_blank" rel="noopener noreferrer" className={`${styles.socialIconBtn} ${styles.ig}`}><FaInstagram /></a>
+              <a href="https://www.tiktok.com/@s.square562?_r=1&_t=ZS-97qwHQbGMOQ" target="_blank" rel="noopener noreferrer" className={`${styles.socialIconBtn} ${styles.tk}`}><FaTiktok /></a>
+              <a href="https://whatsapp.com/channel/0029Vb6EUyPIiRootljmTJ2h" target="_blank" rel="noopener noreferrer" className={`${styles.socialIconBtn} ${styles.wa}`}><FaWhatsapp /></a>
+              <a href="https://www.facebook.com/profile.php?id=61582335014918" target="_blank" rel="noopener noreferrer" className={`${styles.socialIconBtn} ${styles.fb}`}><FaFacebook /></a>
+            </div>
           </div>
         </div>
       </section>
@@ -209,97 +179,62 @@ export default function Home() {
         <div className={styles.sectionHeader}>
           <div className={styles.sectionSubtitle}>Recent Works</div>
         </div>
-        <div className={styles.carouselContainer}>
-          {projects.length === 0 ? (
-            <div style={{ padding: '40px', textAlign: 'center', width: '100%', color: '#aaa' }}>
-              <p>No projects uploaded yet.</p>
-              <p style={{ fontSize: '0.8rem', marginTop: '10px' }}>Upload your works from the admin panel to see them here!</p>
-            </div>
-          ) : (
-            projects.map((project, idx) => (
-              <div key={project.id} className={`${styles.workCard} ${idx === 1 ? styles.active : ''}`}>
-                <Image src={project.thumbnail_url} alt={project.title} fill className="object-cover" />
-                <div className={styles.workOverlay}>
-                  <button className={styles.playBtn} onClick={() => window.open(project.video_url, '_blank')}><Play size={24} fill="#fff" /></button>
-                  <span className={styles.workTitle} style={{textAlign: 'center'}}>{project.title}<br/><span style={{fontSize: '0.6rem', color: '#FFC107'}}>{project.category}</span></span>
+        {!selectedCategory ? (
+          <div className={styles.categoryGrid}>
+            {/* Show category covers */}
+            {Array.from(new Set(projects.map(p => p.category))).map(category => {
+              const categoryProjects = projects.filter(p => p.category === category);
+              const coverProject = categoryProjects[0]; // most recent one
+
+              return (
+                <div key={String(category)} className={styles.categoryCard} onClick={() => setSelectedCategory(String(category))}>
+                  <Image src={coverProject.thumbnail_url} alt={String(category)} fill className="object-cover" />
+                  <div className={styles.categoryOverlay}>
+                    <div className={styles.playBtnCategory}><Play size={24} fill="#fff" /></div>
+                    <span className={styles.categoryTitle}>{String(category)}</span>
+                  </div>
                 </div>
+              );
+            })}
+            {projects.length === 0 && (
+              <div style={{ padding: '40px', textAlign: 'center', width: '100%', color: '#aaa' }}>
+                <p>No projects uploaded yet.</p>
+                <p style={{ fontSize: '0.8rem', marginTop: '10px' }}>Upload your works from the admin panel to see them here!</p>
               </div>
-            ))
-          )}
-        </div>
+            )}
+          </div>
+        ) : (
+          <div>
+            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 20px', marginBottom: '20px', maxWidth: '1200px', margin: '0 auto'}}>
+              <h3 style={{textTransform: 'uppercase', color: '#FFC107', fontSize: '1.2rem'}}>{selectedCategory}</h3>
+              <button className={styles.btnSecondary} onClick={() => setSelectedCategory(null)} style={{padding: '6px 12px', fontSize: '0.8rem'}}>
+                &larr; Back
+              </button>
+            </div>
+            <div className={styles.carouselContainer}>
+              {projects.filter(p => p.category === selectedCategory).map((project, idx) => (
+                <div key={project.id} className={styles.workCard}>
+                  <Image src={project.thumbnail_url} alt={project.title} fill className="object-cover" />
+                  <div className={styles.workOverlay}>
+                    <button className={styles.playBtn} onClick={() => window.open(project.video_url, '_blank')}><Play size={24} fill="#fff" /></button>
+                    <span className={styles.workTitle} style={{textAlign: 'center'}}>{project.title}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </section>
 
-      {/* Softwares */}
-      <section>
-        <div className={styles.sectionHeader} style={{margin: '60px 0 30px'}}>
-          <div className={styles.sectionSubtitle}>Softwares</div>
-        </div>
-        <div className={styles.softwares}>
-          <div className={`${styles.adobeIcon} ${styles.pr}`}>Pr</div>
-          <div className={`${styles.adobeIcon} ${styles.ae}`}>Ae</div>
-          <div className={`${styles.adobeIcon} ${styles.me}`}>Me</div>
-          <div className={styles.davinciIcon}>
-            <SiDavinciresolve size={36} />
-          </div>
-          <div className={`${styles.adobeIcon} ${styles.ps}`}>Ps</div>
-          <div className={`${styles.adobeIcon} ${styles.lr}`}>LrC</div>
-        </div>
-      </section>
 
       {/* My Services */}
-      <section id="services">
-        <div className={styles.sectionHeader}>
-          <div className={styles.sectionSubtitle}>My Services</div>
-        </div>
-        
-        <div className={styles.servicesGrid}>
-          <div className={styles.serviceBox}>
-            <div className={styles.serviceIcon}><Heart size={32} /></div>
-            <div className={styles.serviceTitle}>Wedding<br/>Highlights</div>
-          </div>
-          <div className={styles.serviceBox}>
-            <div className={styles.serviceIcon}><Cake size={32} /></div>
-            <div className={styles.serviceTitle}>Birthday<br/>Cinematics</div>
-          </div>
-          <div className={styles.serviceBox}>
-            <div className={styles.serviceIcon}><Heart size={32} /></div>
-            <div className={styles.serviceTitle}>Pre Wedding<br/>Shoots</div>
-          </div>
-          <div className={styles.serviceBox}>
-            <div className={styles.serviceIcon}><MonitorPlay size={32} /></div>
-            <div className={styles.serviceTitle}>Youtube<br/>Video Editing</div>
-          </div>
-          <div className={styles.serviceBox}>
-            <div className={styles.serviceIcon}><Palette size={32} /></div>
-            <div className={styles.serviceTitle}>Color<br/>Grading</div>
-          </div>
-          <div className={styles.serviceBox}>
-            <div className={styles.serviceIcon}><ImageIcon size={32} /></div>
-            <div className={styles.serviceTitle}>Photo<br/>Retouching</div>
-          </div>
-        </div>
-
-        <div className={styles.largeServices}>
-          <div className={styles.largeServiceCard}>
-            <Image src="/main-bg.jpg" alt="Travel Film" fill className="object-cover" />
-            <div className={styles.workOverlay}>
-              <button className={styles.playBtn} onClick={() => alert("Video coming soon!")}><Play size={24} fill="#fff" /></button>
-              <span className={styles.largeServiceTitle}>Travel Film</span>
-            </div>
-          </div>
-          <div className={styles.largeServiceCard}>
-            <Image src="/bg-birthday.jpg" alt="Product Promo" fill className="object-cover" />
-            <div className={styles.workOverlay}>
-              <button className={styles.playBtn} onClick={() => alert("Video coming soon!")}><Play size={24} fill="#fff" /></button>
-              <span className={styles.largeServiceTitle}>Product Promo</span>
-            </div>
-          </div>
-        </div>
-
-        <div className={styles.viewAll}>
-          <Link href="#portfolio" style={{ textDecoration: 'none' }}>
-            <button className={styles.btnSecondary} style={{fontSize: '0.75rem'}}>View All Projects &gt;</button>
-          </Link>
+      <section id="services" style={{ padding: '60px 0', width: '100%' }}>
+        <div style={{ width: '100%', padding: '0 20px', display: 'flex', justifyContent: 'center' }}>
+          <img 
+            src="/services-banner.png" 
+            alt="My Services" 
+            style={{ width: '100%', maxWidth: '1200px', height: 'auto', borderRadius: '12px', margin: '0 auto' }} 
+          />
         </div>
       </section>
 
@@ -338,11 +273,28 @@ export default function Home() {
             <h3>Have a project in mind?</h3>
             <p>Let&apos;s create something amazing together!</p>
           </div>
-          <div className={styles.contactInfo}>
-            <div className={styles.contactIcon}><MessageCircle size={24} /></div>
-            <div className={styles.contactDetails}>
-              <h4>+94 76 801 9190</h4>
-              <p>Ilavalai, Jaffna</p>
+          <div className={styles.contactInfoContainer}>
+            <div className={styles.contactInfo}>
+              <div className={styles.contactIcon}><MessageCircle size={24} /></div>
+              <div className={styles.contactDetails}>
+                <h4>+94 76 801 9190</h4>
+              </div>
+            </div>
+            <div className={styles.contactInfo}>
+              <div className={styles.contactIcon}><Mail size={24} /></div>
+              <div className={styles.contactDetails}>
+                <h4>
+                  <a href="mailto:studiossquare11@gmail.com" style={{ color: 'inherit', textDecoration: 'none' }}>
+                    studiossquare11@gmail.com
+                  </a>
+                </h4>
+              </div>
+            </div>
+            <div className={styles.contactInfo}>
+              <div className={styles.contactIcon}><MapPin size={24} /></div>
+              <div className={styles.contactDetails}>
+                <h4>Ilavalai, Jaffna</h4>
+              </div>
             </div>
           </div>
           <Link href="https://wa.me/94768019190" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>

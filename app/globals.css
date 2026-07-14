@@ -18,7 +18,13 @@
 html, body {
   margin: 0;
   padding: 0;
-  background-color: var(--color-background);
+  background-color: #111111;
   color: var(--color-foreground);
   overflow-x: hidden;
+}
+
+:root {
+  --font-inter: 'Inter', sans-serif;
+  --font-outfit: 'Outfit', sans-serif;
+  --font-caveat: 'Caveat', cursive;
 }

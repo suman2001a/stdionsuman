@@ -14,12 +14,17 @@
   font-family: var(--font-caveat), cursive;
 }
 
-/* Header */
 .header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  padding: 20px 0;
+  gap: 60px;
+  padding: 40px 60px;
 }
 
 .logo {
@@ -109,34 +114,27 @@
 }
 
 /* Hero Section */
-.hero {
+.heroSection {
   position: relative;
-  min-height: 85vh;
+  width: 100%;
   display: flex;
-  align-items: center;
-  overflow: visible;
+  flex-direction: column;
 }
 
-.heroBackgroundContainer {
-  position: absolute;
-  top: 0;
-  right: -5%;
-  bottom: 0;
-  width: 70%;
-  z-index: 1;
+.heroImageWrapper {
+  width: 100%;
+  position: relative;
+  line-height: 0;
 }
 
-.heroBgImg {
-  object-fit: cover;
-  object-position: center;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%);
-  mask-image: linear-gradient(to right, transparent 0%, black 20%);
+.heroImgResponsive {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 .heroBgOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to right, #050505 0%, transparent 20%);
+  display: none;
 }
 
 .heroContainer {
@@ -151,6 +149,8 @@
 
 .heroLeftText {
   flex: 1.2;
+  margin-top: auto;
+  padding-top: 550px;
 }
 
 .heroRightText {
@@ -159,10 +159,30 @@
   justify-content: flex-end;
   align-items: center;
   padding-right: 20px;
-  margin-top: 150px;
 }
 
-.heroSub {
+.heroDescription {
+  line-height: 1.4;
+  color: #ffcc00;
+  margin-bottom: 25px;
+  font-size: 1.3rem;
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: 0.5px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+}
+
+.heroDescriptionMoved {
+  margin: 40px auto 20px auto;
+  text-align: center;
+}
+
+.heroButtons {
+  display: flex;
+  gap: 15px;
+}
+
+.heroCursiveTop {
   color: #FFC107;
   font-size: 2.2rem;
   margin-bottom: 0px;
@@ -179,26 +199,25 @@
   text-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
 
-.heroTitleSub {
+.heroTitleCursive {
   color: #FFC107;
-  font-size: 4rem;
+  font-size: 4.5rem;
   text-transform: none;
   font-weight: normal;
   display: inline-block;
   position: relative;
   margin-top: -10px;
-  margin-left: 10px;
+  margin-left: 0px;
 }
-.heroTitleSub::after {
+.heroTitleCursive::after {
   content: '';
   position: absolute;
   left: 0;
-  bottom: 5px;
-  width: 100%;
+  bottom: 8px;
+  width: 50px;
   height: 3px;
   background-color: #FFC107;
   border-radius: 2px;
-  transform: rotate(-1deg);
 }
 
 .heroFloatingText {
@@ -331,11 +350,18 @@
   color: #000;
 }
 
-/* Follow Me overlay */
+/* Action Section & Follow Me */
+.actionSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  margin: 20px 0 60px 0;
+  padding: 0 20px;
+}
+
 .followMe {
-  position: absolute;
-  bottom: 10%;
-  left: 5%;
   display: flex;
   align-items: center;
   gap: 20px;
@@ -431,7 +457,67 @@
   letter-spacing: 1px;
 }
 
-/* Recent Works */
+/* Recent Works / Categories */
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 0 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.categoryCard {
+  position: relative;
+  height: 250px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.categoryCard:hover {
+  transform: translateY(-5px);
+  border-color: #FFC107;
+  box-shadow: 0 0 20px rgba(255, 193, 7, 0.2);
+}
+.categoryOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.4) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  align-items: center;
+}
+.categoryOverlay:hover {
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.6) 100%);
+}
+.categoryTitle {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 1.2rem;
+  margin-top: 15px;
+  text-align: center;
+}
+.playBtnCategory {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: auto;
+  margin-top: auto;
+  transition: background 0.3s;
+}
+.categoryCard:hover .playBtnCategory {
+  background: rgba(255, 193, 7, 0.5);
+}
+
 .carouselContainer {
   display: flex;
   gap: 20px;
@@ -700,6 +786,12 @@
   margin: 0;
   font-weight: 600;
 }
+.contactInfoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
 .contactInfo {
   display: flex;
   align-items: center;
@@ -734,27 +826,6 @@
 }
 
 @media (max-width: 900px) {
-  .hero {
-    padding-top: 50px;
-  }
-  .heroContainer {
-    flex-direction: column;
-    text-align: center;
-  }
-  .heroBackgroundContainer {
-    width: 100%;
-    opacity: 0.4;
-    right: 0;
-  }
-  .heroRightText {
-    margin-top: 50px;
-    justify-content: center;
-    padding-right: 0;
-  }
-  .heroSub {
-    margin-left: 0;
-    transform: none;
-  }
   .about {
     flex-direction: column;
   }
@@ -775,6 +846,9 @@
   .ctaText {
     text-align: center;
   }
+  .contactInfoContainer {
+    align-items: center;
+  }
 }
 
 @media (max-width: 600px) {
@@ -786,5 +860,45 @@
   }
   .servicesGrid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .heroBackgroundContainer {
+    position: relative;
+    width: 100%;
+    overflow-x: auto;
+    height: 350px;
+  }
+  .heroBgImg {
+    width: 800px;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+  }
+  .heroLeftText {
+    padding-top: 20px;
+    text-align: center;
+  }
+  .heroDescription {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    margin: 0 auto 20px auto;
+  }
+  .heroDescriptionMoved {
+    margin-top: 30px;
+    text-align: center;
+  }
+  .heroButtons {
+    justify-content: center;
+  }
+  .btnPrimary, .btnSecondary {
+    padding: 10px 16px;
+    font-size: 0.75rem;
+  }
+  .hero {
+    min-height: auto;
+    padding-bottom: 50px;
+    display: block;
+  }
+  .heroContainer {
+    padding-top: 20px;
   }
 }
