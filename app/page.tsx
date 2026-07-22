@@ -24,6 +24,9 @@ import styles from "./page.module.css";
 import { FaFacebook, FaWhatsapp, FaInstagram, FaTiktok } from 'react-icons/fa';
 import { SiDavinciresolve } from 'react-icons/si';
 
+import heroBg from '../public/hero-bg.jpeg';
+import servicesBanner from '../public/services-banner.png';
+
 export default function Home() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [projects, setProjects] = useState<any[]>([]);
@@ -107,10 +110,9 @@ export default function Home() {
       <section id="home" className={styles.heroSection}>
         <div className={styles.heroImageWrapper}>
           <Image 
-            src="/1.jpg (3).jpeg" 
+            src={heroBg} 
             alt="Hero Background" 
-            width={1920}
-            height={1080}
+            fill
             className={styles.heroImgResponsive}
           />
         </div>
@@ -233,10 +235,8 @@ export default function Home() {
       <section id="services" style={{ padding: '60px 0', width: '100%' }}>
         <div style={{ width: '100%', padding: '0 20px', display: 'flex', justifyContent: 'center' }}>
           <Image 
-            src="/services-banner.png" 
+            src={servicesBanner} 
             alt="My Services" 
-            width={1200}
-            height={400}
             style={{ width: '100%', maxWidth: '1200px', height: 'auto', borderRadius: '12px', margin: '0 auto' }} 
           />
         </div>
