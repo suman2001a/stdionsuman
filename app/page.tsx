@@ -106,9 +106,11 @@ export default function Home() {
       {/* Hero Section */}
       <section id="home" className={styles.heroSection}>
         <div className={styles.heroImageWrapper}>
-          <img 
+          <Image 
             src="/1.jpg (3).jpeg" 
             alt="Hero Background" 
+            width={1920}
+            height={1080}
             className={styles.heroImgResponsive}
           />
         </div>
@@ -230,9 +232,11 @@ export default function Home() {
       {/* My Services */}
       <section id="services" style={{ padding: '60px 0', width: '100%' }}>
         <div style={{ width: '100%', padding: '0 20px', display: 'flex', justifyContent: 'center' }}>
-          <img 
+          <Image 
             src="/services-banner.png" 
             alt="My Services" 
+            width={1200}
+            height={400}
             style={{ width: '100%', maxWidth: '1200px', height: 'auto', borderRadius: '12px', margin: '0 auto' }} 
           />
         </div>
