@@ -112,7 +112,6 @@ export default function Home() {
           <Image 
             src={heroBg} 
             alt="Hero Background" 
-            fill
             className={styles.heroImgResponsive}
           />
         </div>
