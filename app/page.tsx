@@ -249,6 +249,9 @@ export default function Home() {
 
       {/* My Services */}
       <section id="services" style={{ padding: '60px 0', width: '100%' }}>
+        <div className={styles.sectionHeader} style={{ marginTop: 0, marginBottom: '40px' }}>
+          <div className={styles.sectionSubtitle}>My Services</div>
+        </div>
         <div style={{ width: '100%', padding: '0 20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <Image 
             src={servicesBanner} 
