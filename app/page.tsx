@@ -120,24 +120,24 @@ export default function Home() {
         <div className={styles.actionSection}>
           <div className={styles.heroButtons}>
             <Link href="#portfolio" style={{ textDecoration: 'none' }}>
-              <button className={styles.btnPrimary}>
-                <Play size={18} fill="currentColor" />
+              <button className={styles.btnPrimary} style={{ padding: '8px 16px', fontSize: '0.8rem' }}>
+                <Play size={16} fill="currentColor" />
                 WATCH SHOWREEL
               </button>
             </Link>
             <Link href="#portfolio" style={{ textDecoration: 'none' }}>
-              <button className={styles.btnSecondary}>
+              <button className={styles.btnSecondary} style={{ padding: '8px 16px', fontSize: '0.8rem' }}>
                 VIEW MY WORK
               </button>
             </Link>
           </div>
           <div className={styles.followMe}>
-            <span className={styles.followText}>FOLLOW ME</span>
+            <span className={styles.followText} style={{ fontSize: '0.8rem' }}>FOLLOW ME</span>
             <div className={styles.socialIcons}>
-              <a href="https://www.instagram.com/stud.iossquare?igsh=MTZ1c3Z3ZGMxNWFxaw==" target="_blank" rel="noopener noreferrer" className={`${styles.socialIconBtn} ${styles.ig}`}><FaInstagram /></a>
-              <a href="https://www.tiktok.com/@s.square562?_r=1&_t=ZS-97qwHQbGMOQ" target="_blank" rel="noopener noreferrer" className={`${styles.socialIconBtn} ${styles.tk}`}><FaTiktok /></a>
-              <a href="https://whatsapp.com/channel/0029Vb6EUyPIiRootljmTJ2h" target="_blank" rel="noopener noreferrer" className={`${styles.socialIconBtn} ${styles.wa}`}><FaWhatsapp /></a>
-              <a href="https://www.facebook.com/profile.php?id=61582335014918" target="_blank" rel="noopener noreferrer" className={`${styles.socialIconBtn} ${styles.fb}`}><FaFacebook /></a>
+              <a href="https://www.instagram.com/stud.iossquare?igsh=MTZ1c3Z3ZGMxNWFxaw==" target="_blank" rel="noopener noreferrer" className={`${styles.socialIconBtn} ${styles.ig}`} style={{ width: '30px', height: '30px', fontSize: '1.1rem' }}><FaInstagram /></a>
+              <a href="https://www.tiktok.com/@s.square562?_r=1&_t=ZS-97qwHQbGMOQ" target="_blank" rel="noopener noreferrer" className={`${styles.socialIconBtn} ${styles.tk}`} style={{ width: '30px', height: '30px', fontSize: '1.1rem' }}><FaTiktok /></a>
+              <a href="https://whatsapp.com/channel/0029Vb6EUyPIiRootljmTJ2h" target="_blank" rel="noopener noreferrer" className={`${styles.socialIconBtn} ${styles.wa}`} style={{ width: '30px', height: '30px', fontSize: '1.1rem' }}><FaWhatsapp /></a>
+              <a href="https://www.facebook.com/profile.php?id=61582335014918" target="_blank" rel="noopener noreferrer" className={`${styles.socialIconBtn} ${styles.fb}`} style={{ width: '30px', height: '30px', fontSize: '1.1rem' }}><FaFacebook /></a>
             </div>
           </div>
         </div>
@@ -230,14 +230,52 @@ export default function Home() {
       </section>
 
 
+      {/* Softwares */}
+      <section>
+        <div className={styles.sectionHeader} style={{ margin: '60px 0 30px' }}>
+          <div className={styles.sectionSubtitle}>Softwares</div>
+        </div>
+        <div className={styles.softwares}>
+          <div className={`${styles.adobeIcon} ${styles.pr}`}>Pr</div>
+          <div className={`${styles.adobeIcon} ${styles.ae}`}>Ae</div>
+          <div className={`${styles.adobeIcon} ${styles.me}`}>Me</div>
+          <div className={styles.davinciIcon}>
+            <SiDavinciresolve size={32} />
+          </div>
+          <div className={`${styles.adobeIcon} ${styles.ps}`}>Ps</div>
+          <div className={`${styles.adobeIcon} ${styles.lr}`}>LrC</div>
+        </div>
+      </section>
+
       {/* My Services */}
       <section id="services" style={{ padding: '60px 0', width: '100%' }}>
-        <div style={{ width: '100%', padding: '0 20px', display: 'flex', justifyContent: 'center' }}>
+        <div style={{ width: '100%', padding: '0 20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <Image 
             src={servicesBanner} 
             alt="My Services" 
-            style={{ width: '100%', maxWidth: '1200px', height: 'auto', borderRadius: '12px', margin: '0 auto' }} 
+            style={{ width: '100%', maxWidth: '1200px', height: 'auto', borderRadius: '12px', margin: '0 auto 40px auto' }} 
           />
+          
+          <div className={styles.largeServices} style={{ width: '100%', maxWidth: '1200px' }}>
+            <div className={styles.largeServiceCard}>
+              <Image src="/main-bg.jpg" alt="Travel Film" fill className="object-cover" style={{ objectFit: 'cover' }} />
+              <div className={styles.workOverlay}>
+                <button className={styles.playBtn}>
+                  <Play size={24} fill="#fff" />
+                </button>
+                <span className={styles.largeServiceTitle}>Travel Film</span>
+              </div>
+            </div>
+            <div className={styles.largeServiceCard}>
+              <Image src="/bg-birthday.jpg" alt="Product Promo" fill className="object-cover" style={{ objectFit: 'cover' }} />
+              <div className={styles.workOverlay}>
+                <button className={styles.playBtn}>
+                  <Play size={24} fill="#fff" />
+                </button>
+                <span className={styles.largeServiceTitle}>Product Promo</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
